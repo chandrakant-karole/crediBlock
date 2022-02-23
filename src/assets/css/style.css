@@ -34,6 +34,9 @@
 .searchDiv .search_bar:focus{
     box-shadow: 0px 0px 5px #688efb !important;
 }
+.input-group>.form-control:focus, .input-group>.form-select:focus {
+    z-index: 0;
+}
 
 /* =============header css start============ */
 .header{
@@ -199,9 +202,20 @@
     text-align: center;
 }
 .error{
-    background-color: red;
+ color: red;
 }
-
+.logout_btn{
+    background-color: transparent;
+    color: #333;
+    padding: 0px;
+    border: none;
+}
+.logout_btn:hover, .logout_btn:focus{
+    background-color: transparent;
+    color: #333;
+    padding: 0px;
+    border: none;
+}
 /* =============login css end============ */
 
 
@@ -262,10 +276,10 @@
     height: 100%;
 } */
 .left_chat_box{
-    min-height: 548px;
+    height: 579px;
     border-right: 1px solid #83acfb;
     background: white;
-    /* overflow-y: scroll; */
+    overflow-y: scroll;
     
 }
 /* .search{
