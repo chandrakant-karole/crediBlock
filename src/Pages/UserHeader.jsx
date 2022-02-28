@@ -1,10 +1,14 @@
 import React from 'react'
-import { Container, Row, Col, Navbar, Nav, NavDropdown } from 'react-bootstrap'
-
-import { FaBell, FaChevronDown } from 'react-icons/fa';
+import { Container, Row, Col, Navbar, Nav, NavDropdown ,Button} from 'react-bootstrap'
+import { useNavigate } from "react-router-dom";
+import { FaBell } from 'react-icons/fa';
 function UserHeader() {
+    const navigate = useNavigate();
 
-
+const logout = ()=>{
+    sessionStorage.removeItem("user");
+    navigate("/");
+}
     return (
         <div>
             <Container fluid>
@@ -32,7 +36,7 @@ function UserHeader() {
                                             <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
 
                                             <NavDropdown.Divider />
-                                            <NavDropdown.Item href="#action/3.4">Logout</NavDropdown.Item>
+                                            <NavDropdown.Item><Button className='logout_btn' onClick={logout}>Logout</Button></NavDropdown.Item>
                                         </NavDropdown>
                                         </Nav.Link>
                                 

@@ -9,6 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 
 function Login() {
+    const [user, setUser] = useState("")
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -40,7 +41,7 @@ function Login() {
         if (!password) {
             $("#password1").show();
         }
-       
+
         try {
             const config = {
                 headers: {
@@ -50,6 +51,12 @@ function Login() {
 
             //login api calling
             const { data } = await axios.post(LOGIN + role, { email, password }, config);
+
+
+            // store the user in localStorage
+            sessionStorage.setItem('user', JSON.stringify(data))
+            console.log("sessionStorage data", data)
+
 
             // insession store login user data in userInfo key 
 
@@ -62,17 +69,9 @@ function Login() {
             }
             if (data.statusCode === 403) {
 
-                toast('Incorrect role', {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    // progress: undefined,
-                    });
-    
-               
+                toast('Incorrect role' );
+
+
             }
 
             if (data.statusCode === 200) {
@@ -83,8 +82,16 @@ function Login() {
             console.log("error", error)
         }
 
-    }
 
+    }
+ useEffect(() => {
+    const loggedInUser = sessionStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser);
+      History('/chat');
+    }
+  }, [History]);
 
     return (
         <>
@@ -105,7 +112,7 @@ function Login() {
                                 </Form.Group>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Password</Form.Label>
-                                    <Form.Control  className='validate' type="password" placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)} value={password} />
+                                    <Form.Control className='validate' type="password" placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)} value={password} />
                                     <p className='error' id="password1"> *Enter Password</p>
                                     <p className='error' id="password2">*Password is not correct!</p>
 

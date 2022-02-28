@@ -1,11 +1,12 @@
 import React from 'react'
 import UserHeader from './UserHeader'
 import { Container, Row, Col} from 'react-bootstrap'
-
+import { ChatState } from '../context/ChatProvider';
 import UserFooter from './UserFooter';
 import UserList from './UserList';
 import UserChat from './UserChat';
 function Chat() {
+  
   return (
     <div>
       <UserHeader />
